@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { useState } from "react";
-import UpdateWorkoutForm from "./update-workout-form";
+import UpdateWorkoutForm from "./forms/update-workout-form";
 import type { Workout } from "@/types";
 
 export default function UpdateWorkoutModal({

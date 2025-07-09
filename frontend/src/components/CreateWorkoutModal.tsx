@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import CreateWorkoutForm from "./create-workout-form";
+import CreateWorkoutForm from "./forms/create-workout-form";
 import { useState } from "react";
 
 export default function CreateWorkoutModal({
