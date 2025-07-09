@@ -10,6 +10,7 @@ import DeleteConfirmationDialog from "@/components/DeleteConfirmationDialog";
 
 import type { Workout } from "@/types";
 import { API_BASE_URL } from "@/config";
+import Logout from "@/components/Logout";
 
 const DashboardPage = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -35,7 +36,8 @@ const DashboardPage = () => {
       toast.success("Workout deleted!");
       onWorkoutCreated();
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+      const errorMessage =
+        error instanceof Error ? error.message : "An unknown error occurred";
       toast.error(errorMessage || "Failed to delete workout");
       console.error("Error deleting workout:", errorMessage);
     } finally {
@@ -85,6 +87,7 @@ const DashboardPage = () => {
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">💪 Workout Tracker</h1>
           <CreateWorkoutModal onWorkoutCreated={onWorkoutCreated} />
+          <Logout />
         </div>
         {/* Workout List */}
         <div>

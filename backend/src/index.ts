@@ -7,13 +7,12 @@ import workoutRouter from "./routes/workoutRoute";
 import exerciseRouter from "./routes/exerciseRoute";
 import setsRouter from "./routes/setsRoute";
 
-
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"], // Replace with your frontend's origin
+    origin: ["http://localhost:5173"], // Replace with your frontend's origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   })
@@ -24,7 +23,6 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 // Mount express json middleware after Better Auth handler
 // or only apply it to routes that don't interact with Better Auth
 app.use(express.json());
-
 
 app.use("/api/workouts", workoutRouter);
 app.use("/api/exercises", exerciseRouter);

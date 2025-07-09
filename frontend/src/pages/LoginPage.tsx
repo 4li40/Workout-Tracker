@@ -12,7 +12,7 @@ const LoginPage = () => {
   const loginWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:5174/dashboard",
+      callbackURL: "http://localhost:5173/dashboard",
     });
   };
   return (
