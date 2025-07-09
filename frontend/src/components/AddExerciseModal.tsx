@@ -18,7 +18,10 @@ interface AddExerciseModalProps {
   onExerciseAdded: () => void;
 }
 
-const AddExerciseModal = ({ workoutId, onExerciseAdded }: AddExerciseModalProps) => {
+const AddExerciseModal = ({
+  workoutId,
+  onExerciseAdded,
+}: AddExerciseModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);

@@ -18,7 +18,11 @@ interface AddSetModalProps {
   children: React.ReactNode;
 }
 
-const AddSetModal = ({ exerciseId, onSetAdded, children }: AddSetModalProps) => {
+const AddSetModal = ({
+  exerciseId,
+  onSetAdded,
+  children,
+}: AddSetModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
@@ -26,7 +30,7 @@ const AddSetModal = ({ exerciseId, onSetAdded, children }: AddSetModalProps) => 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const weightNum = parseFloat(weight);
     const repsNum = parseInt(reps);
 
@@ -76,9 +80,7 @@ const AddSetModal = ({ exerciseId, onSetAdded, children }: AddSetModalProps) => 
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add New Set</DialogTitle>

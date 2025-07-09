@@ -103,10 +103,7 @@ const DashboardPage = () => {
                 <li className="text-gray-500">No workouts found.</li>
               ) : (
                 workouts.map((workout: Workout) => (
-                  <li
-                    key={workout.id}
-                    className="p-4 bg-white rounded shadow"
-                  >
+                  <li key={workout.id} className="p-4 bg-white rounded shadow">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <div className="font-semibold">
@@ -135,8 +132,8 @@ const DashboardPage = () => {
                         </DeleteConfirmationDialog>
                       </div>
                     </div>
-                    <WorkoutExercises 
-                      workoutId={workout.id} 
+                    <WorkoutExercises
+                      workoutId={workout.id}
                       initialExercises={workout.exercises || []}
                     />
                   </li>

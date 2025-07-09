@@ -13,7 +13,10 @@ interface WorkoutExercisesProps {
   initialExercises?: Exercise[];
 }
 
-const WorkoutExercises = ({ workoutId, initialExercises = [] }: WorkoutExercisesProps) => {
+const WorkoutExercises = ({
+  workoutId,
+  initialExercises = [],
+}: WorkoutExercisesProps) => {
   const [exercises, setExercises] = useState<Exercise[]>(initialExercises);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,9 +84,11 @@ const WorkoutExercises = ({ workoutId, initialExercises = [] }: WorkoutExercises
           ) : (
             <ChevronRight className="h-4 w-4 mr-1" />
           )}
-          {exercises.length > 0 ? `${exercises.length} exercise${exercises.length !== 1 ? 's' : ''}` : 'Exercises'}
+          {exercises.length > 0
+            ? `${exercises.length} exercise${exercises.length !== 1 ? "s" : ""}`
+            : "Exercises"}
         </Button>
-        
+
         {isExpanded && (
           <AddExerciseModal
             workoutId={workoutId}
@@ -112,7 +117,8 @@ const WorkoutExercises = ({ workoutId, initialExercises = [] }: WorkoutExercises
                       <div className="font-medium text-sm">{exercise.name}</div>
                       {exercise.sets && exercise.sets.length > 0 && (
                         <div className="text-xs text-gray-500 mt-1">
-                          {exercise.sets.length} set{exercise.sets.length !== 1 ? 's' : ''}
+                          {exercise.sets.length} set
+                          {exercise.sets.length !== 1 ? "s" : ""}
                         </div>
                       )}
                     </div>
@@ -121,11 +127,7 @@ const WorkoutExercises = ({ workoutId, initialExercises = [] }: WorkoutExercises
                         exerciseId={exercise.id}
                         onSetAdded={fetchExercises}
                       >
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-xs"
-                        >
+                        <Button variant="ghost" size="sm" className="text-xs">
                           <Plus className="h-3 w-3 mr-1" />
                           Add Set
                         </Button>
@@ -139,7 +141,7 @@ const WorkoutExercises = ({ workoutId, initialExercises = [] }: WorkoutExercises
                       </DeleteConfirmationDialog>
                     </div>
                   </div>
-                  
+
                   {/* Display sets */}
                   {exercise.sets && exercise.sets.length > 0 && (
                     <div className="mt-3 space-y-1">
