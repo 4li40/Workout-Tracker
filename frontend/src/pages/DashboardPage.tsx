@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import UpdateWorkoutModal from "@/components/UpdateWorkoutModal";
 import DeleteConfirmationDialog from "@/components/DeleteConfirmationDialog";
+import WorkoutExercises from "@/components/WorkoutExercises";
 
 import type { Workout } from "@/types";
 import { API_BASE_URL } from "@/config";
@@ -104,36 +105,40 @@ const DashboardPage = () => {
                 workouts.map((workout: Workout) => (
                   <li
                     key={workout.id}
-                    className="p-4 bg-white rounded shadow flex justify-between items-center"
+                    className="p-4 bg-white rounded shadow"
                   >
-                    <div>
-                      <div className="font-semibold">
-                        {workout.title || "Untitled Workout"}
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="font-semibold">
+                          {workout.title || "Untitled Workout"}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {new Date(workout.createdAt).toLocaleDateString() ||
+                            "No date"}
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {new Date(workout.createdAt).toLocaleDateString() ||
-                          "No date"}
+                      <div className="flex space-x-2">
+                        <UpdateWorkoutModal
+                          workout={workout}
+                          onUpdate={onWorkoutCreated}
+                        >
+                          <Button variant="outline" size="icon">
+                            <Pencil className="h-4 w-4" />
+                          </Button>
+                        </UpdateWorkoutModal>
+                        <DeleteConfirmationDialog
+                          onConfirm={() => handleDeleteWorkout(workout.id)}
+                        >
+                          <Button variant="destructive" size="icon">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </DeleteConfirmationDialog>
                       </div>
                     </div>
-                    <div className="flex space-x-2">
-                      {" "}
-                      {/* Add a div to group buttons */}
-                      <UpdateWorkoutModal
-                        workout={workout}
-                        onUpdate={onWorkoutCreated}
-                      >
-                        <Button variant="outline" size="icon">
-                          <Pencil className="h-4 w-4" />
-                        </Button>
-                      </UpdateWorkoutModal>
-                      <DeleteConfirmationDialog
-                        onConfirm={() => handleDeleteWorkout(workout.id)}
-                      >
-                        <Button variant="destructive" size="icon">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </DeleteConfirmationDialog>
-                    </div>
+                    <WorkoutExercises 
+                      workoutId={workout.id} 
+                      initialExercises={workout.exercises || []}
+                    />
                   </li>
                 ))
               )}
