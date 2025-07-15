@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronRight, Trash2, Plus } from "lucide-react";
+import { ChevronDown, ChevronRight, Trash2, Plus, Pencil } from "lucide-react";
 import { toast } from "sonner";
 import { API_BASE_URL } from "@/config";
 import AddExerciseModal from "./AddExerciseModal";
 import AddSetModal from "./AddSetModal";
+import EditSetModal from "./EditSetModal";
+import EditExerciseModal from "./EditExerciseModal";
 import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 import type { Exercise } from "@/types";
 
@@ -132,6 +134,11 @@ const WorkoutExercises = ({
                           Add Set
                         </Button>
                       </AddSetModal>
+                      <EditExerciseModal
+                        exerciseId={exercise.id}
+                        initialName={exercise.name}
+                        onExerciseEdited={fetchExercises}
+                      />
                       <DeleteConfirmationDialog
                         onConfirm={() => handleDeleteExercise(exercise.id)}
                       >
@@ -154,6 +161,57 @@ const WorkoutExercises = ({
                           <span className="text-gray-600">
                             {set.weight} lbs × {set.reps} reps
                           </span>
+                          <div className="flex space-x-1">
+                            <EditSetModal
+                              setId={set.id}
+                              initialWeight={set.weight}
+                              initialReps={set.reps}
+                              onSetEdited={fetchExercises}
+                            >
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-xs"
+                              >
+                                <Pencil className="h-3 w-3 mr-1" />
+                                Edit
+                              </Button>
+                            </EditSetModal>
+                            <DeleteConfirmationDialog
+                              onConfirm={async () => {
+                                try {
+                                  const response = await fetch(
+                                    `${API_BASE_URL}/sets/${set.id}`,
+                                    {
+                                      method: "DELETE",
+                                    }
+                                  );
+                                  if (!response.ok) {
+                                    const errorData = await response.json();
+                                    throw new Error(
+                                      errorData.error || "Failed to delete set"
+                                    );
+                                  }
+                                  toast.success("Set deleted!");
+                                  fetchExercises();
+                                } catch (error: unknown) {
+                                  const errorMessage =
+                                    error instanceof Error
+                                      ? error.message
+                                      : "An unknown error occurred";
+                                  toast.error(errorMessage);
+                                  console.error(
+                                    "Error deleting set:",
+                                    errorMessage
+                                  );
+                                }
+                              }}
+                            >
+                              <Button variant="ghost" size="sm">
+                                <Trash2 className="h-3 w-3 text-red-500" />
+                              </Button>
+                            </DeleteConfirmationDialog>
+                          </div>
                         </div>
                       ))}
                     </div>
