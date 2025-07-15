@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { BarChart, Dumbbell, Timer, Menu } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 import { useState } from "react";
 
 const NavLink = ({
@@ -26,7 +26,7 @@ const HomePage = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6, ease: easeOut },
     },
   };
 
@@ -41,8 +41,6 @@ const HomePage = () => {
               <span className="text-2xl font-bold">Workout Tracker</span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
-              <NavLink to="#features">Features</NavLink>
-              <NavLink to="#cta">Get Started</NavLink>
               <NavLink to="/login">Login</NavLink>
             </div>
             <div className="md:hidden">
@@ -88,7 +86,7 @@ const HomePage = () => {
             Get Started Now
           </Link>
           <a
-            href="https://github.com/your-repo"
+            href="https://github.com/4li40/Workout-Tracker"
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-5 rounded-full border-2 border-border text-foreground font-bold text-xl shadow-2xl hover:bg-accent hover:text-accent-foreground transform hover:scale-105 transition-all duration-300"
@@ -123,7 +121,7 @@ const HomePage = () => {
               variants={featureVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, delay: 0.2 }}
+              viewport={{ once: true }}
               className="flex flex-col items-center text-center p-8 bg-card rounded-3xl shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300"
             >
               <Dumbbell className="w-16 h-16 text-primary mb-6" />
@@ -139,7 +137,7 @@ const HomePage = () => {
               variants={featureVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, delay: 0.4 }}
+              viewport={{ once: true }}
               className="flex flex-col items-center text-center p-8 bg-card rounded-3xl shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300"
             >
               <Timer className="w-16 h-16 text-primary mb-6" />

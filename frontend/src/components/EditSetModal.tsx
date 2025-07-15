@@ -18,7 +18,7 @@ interface EditSetModalProps {
   initialWeight: number;
   initialReps: number;
   onSetEdited: () => void;
-  children: React.ReactNode;
+  // ...existing code...
 }
 
 const EditSetModal = ({
@@ -26,8 +26,8 @@ const EditSetModal = ({
   initialWeight,
   initialReps,
   onSetEdited,
-  children,
-}: EditSetModalProps) => {
+}: // ...existing code...
+EditSetModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weight, setWeight] = useState(initialWeight.toString());
   const [reps, setReps] = useState(initialReps.toString());

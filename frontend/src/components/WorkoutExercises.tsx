@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronRight, Trash2, Plus, Pencil } from "lucide-react";
+import { ChevronDown, ChevronRight, Trash2, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { API_BASE_URL } from "@/config";
 import AddExerciseModal from "./AddExerciseModal";
@@ -167,16 +167,7 @@ const WorkoutExercises = ({
                               initialWeight={set.weight}
                               initialReps={set.reps}
                               onSetEdited={fetchExercises}
-                            >
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-xs"
-                              >
-                                <Pencil className="h-3 w-3 mr-1" />
-                                Edit
-                              </Button>
-                            </EditSetModal>
+                            />
                             <DeleteConfirmationDialog
                               onConfirm={async () => {
                                 try {
