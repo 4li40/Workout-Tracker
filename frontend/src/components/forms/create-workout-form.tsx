@@ -86,7 +86,8 @@ export default function CreateWorkoutForm({
       if (onClose) onClose(); // <-- Close the dialog
       navigate("/dashboard");
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+      const errorMessage =
+        error instanceof Error ? error.message : "An unknown error occurred";
       toast.error(errorMessage || "Failed to create workout");
       console.error(errorMessage);
     } finally {
@@ -109,9 +110,15 @@ export default function CreateWorkoutForm({
             </FormItem>
           )}
         />
-        <Button disabled={isLoading} type="submit">
-          {isLoading ? <Loader2 className="animate-spin" /> : "Create Workout"}
-        </Button>
+        <div className="flex justify-end mt-4">
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              "Create Workout"
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );
